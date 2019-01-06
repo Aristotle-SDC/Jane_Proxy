@@ -9,13 +9,14 @@ app.use('/', express.static('./public'));
 app.use(/\/\d+\//, express.static('./public'));
 
 app.use('/api/jane/player/:id', (req, res) => {
-  var url = `http://localhost:3002/api/jane/player/${req.params.id}`;
+  var url = `http://localhost:5000/api/jane/player/${req.params.id}`;
   req.pipe(request(url)).pipe(res);
 });
 
-// app.use('/api/songs-info', (req, res) => {
-//   var url =
-// })
+app.use('/api/songs-info/:id', (req, res) => {
+  var url = `http://localhost:3001/api/songs-info/${req.params.id}`;
+  req.pipe(request(url)).pipe(res);
+});
 
 app.listen(port, () => {
   console.log(`server running at: http://localhost:${port}`);
