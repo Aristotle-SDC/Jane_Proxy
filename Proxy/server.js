@@ -18,6 +18,11 @@ app.use('/api/songs-info/:id', (req, res) => {
   req.pipe(request(url)).pipe(res);
 });
 
+app.use('/api/tracks', (req, res) => {
+  var url = 'http://localhost:3004/api/tracks';
+  req.pipe(request(url)).pipe(res);
+});
+
 app.listen(port, () => {
   console.log(`server running at: http://localhost:${port}`);
 });
