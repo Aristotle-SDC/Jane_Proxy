@@ -23,6 +23,21 @@ app.use('/api/tracks', (req, res) => {
   req.pipe(request(url)).pipe(res);
 });
 
+app.use('/api/comments', (req, res) => {
+  var url = 'http://localhost:3003/api/comments';
+  req.pipe(request(url)).pipe(res);
+});
+
+app.use('/api/tracks', (req, res) => {
+  var url = 'http://localhost:3003/api/singleComment';
+  req.pipe(request(url)).pipe(res);
+});
+
+app.use('/api/tracks', (req, res) => {
+  var url = 'http://localhost:3003/api/comments';
+  req.pipe(request(url)).pipe(res);
+});
+
 app.listen(port, () => {
   console.log(`server running at: http://localhost:${port}`);
 });
