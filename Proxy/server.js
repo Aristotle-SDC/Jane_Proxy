@@ -8,21 +8,25 @@ const port = process.env.PORT || 3000;
 app.use('/', express.static('./public'));
 app.use(/\/\d+\//, express.static('./public'));
 
+// jane's component
 app.use('/api/jane/player/:id', (req, res) => {
   var url = `http://localhost:5000/api/jane/player/${req.params.id}`;
   req.pipe(request(url)).pipe(res);
 });
 
+// steven's component
 app.use('/api/songs-info/:id', (req, res) => {
   var url = `http://localhost:3001/api/songs-info/${req.params.id}`;
   req.pipe(request(url)).pipe(res);
 });
 
-app.use('/api/tracks', (req, res) => {
-  var url = 'http://localhost:3004/api/tracks';
+// justin's component
+app.use('/:id', (req, res) => {
+  var url = `http://localhost:3004/${req.params.id}`;
   req.pipe(request(url)).pipe(res);
 });
 
+// thom's component
 app.use('/api/comments', (req, res) => {
   var url = 'http://localhost:3003/api/comments';
   req.pipe(request(url)).pipe(res);
