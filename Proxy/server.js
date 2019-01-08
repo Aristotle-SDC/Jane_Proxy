@@ -21,16 +21,35 @@ app.use('/api/songs-info/:id', (req, res) => {
 });
 
 // justin's component
-app.use('/:id', (req, res) => {
-  var url = `http://localhost:3004/${req.params.id}`;
-  req.pipe(request(url)).pipe(res);
-});
+
 
 // thom's component
 app.use('/api/comments', (req, res) => {
   var url = 'http://localhost:3003/api/comments';
   req.pipe(request(url)).pipe(res);
 });
+app.get('/api/comments', (req, res) => {
+  db.GetAllComments( 
+    (err,comments) => {
+      if (err) {throw err}
+      else {res.send(comments);}
+    }
+  );
+ 
+});
+
+app.post('/api/comments', (req,res) => {
+  db.AddOne(req.body,
+    (err,comment) => {
+      if (err) {console.log('error in express');throw err;}
+      else {
+        console.log(comment);
+        res.send(200,comment.insertId)}
+        // ^ Send insertId to client
+        // so that client can automatically add the correct comment
+    }
+  )
+})
 
 app.use('/api/tracks', (req, res) => {
   var url = 'http://localhost:3003/api/singleComment';
